@@ -1,0 +1,122 @@
+body {
+    text-align: center;
+}
+
+.container {
+    position: relative;
+}
+
+.rectangles-area {
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+    min-height: 500px;
+}
+
+.rectangles {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.single-rectangle {
+    width: 20px;
+    height: 20px;
+    background: rgb(235, 235, 235);
+    border: 0.5px solid gray;
+    margin: 0.5px;
+}
+
+.colored > .red {
+    background-color: rgb(220, 110, 110);
+}
+
+.colored > .green {
+    background-color: rgb(96, 208, 154);
+}
+
+.button {
+    margin-top: 25px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.button:active {
+    background-color: gray;
+}
+
+.answer-board {
+    position: absolute;
+    border: 1px solid rgb(232, 232, 183);
+    border-radius: 10px;
+    background-color: rgb(232, 232, 183);
+    color: rgb(122, 115, 15);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 16%;
+    height: 14%;
+    top: 7%;
+    left: 42%;
+    font-size: 1.6rem;
+}
+
+.guess-card {
+    position: absolute;
+    border: 1px solid rgb(113, 113, 44);
+    border-radius: 10px;
+    background-color: rgb(113, 113, 44);
+    color: rgb(232, 232, 183);
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    flex-direction: column;
+    width: 16%;
+    height: 10%;
+    top: 7%;
+    left: 42%;
+    font-size: 1rem;
+    padding-top: 1px;
+    z-index: -1;
+}
+
+.records {
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 8px;
+    color: rgb(178, 167, 17)
+}
+
+#howto-symbol {
+    position: absolute;
+    border: 1px solid rgb(232, 232, 183);
+    border-radius: 10px;
+    background-color: rgb(232, 232, 183);
+    color: rgb(122, 115, 15);
+    width: 20px;
+    height: 20px;
+    top: 5%;
+    left: 5%;
+    font-size: 1rem;
+    cursor: default;
+}
+
+.howto-board {
+    position: absolute;
+    border: 1px solid rgb(232, 232, 183);
+    border-radius: 10px;
+    background-color: rgb(232, 232, 183);
+    color: rgb(122, 115, 15);
+    width: 25%;
+    top: 4%;
+    left: 7%;
+    font-size: 0.8rem;
+}
+
+.hidden {
+    visibility: hidden;
+}

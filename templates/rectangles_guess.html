@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='rectangles.css') }}">
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Largest Rectangle</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<div class="container">
+    <div class="rectangles-area">
+        {% for height in heights %}
+        {% if loop.index0 >= data[1] and loop.index0 <= data[2] %}
+        <div class="rectangles colored">
+            {% for i in range(height)%}
+            {% if i >= height - data[3] %}
+            <div class="single-rectangle red"></div>
+            {% else %}
+            <div class="single-rectangle"></div>
+            {% endif %}
+            {% endfor %}
+        {% else %}
+        <div class="rectangles">
+            {% for i in range(height)%}
+            <div class="single-rectangle"></div>
+            {% endfor %}
+        {% endif %}
+        <div style="margin-top: 3px; font-size: 10px;">{{ height }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="answer-board">
+        {{ data[3] }} x {{ data[2] - data[1] + 1 }} = {{ data[0] }}
+    </div>
+    <div id="howto-symbol">
+        ?
+    </div>
+    <div class="howto-board hidden">
+        <p>
+            "Find" button displays the largest rectangle by area inside the histogram.
+        </p>
+        <p>
+            Clicking any single rectangle will display largest rectangle inside the histogram containing that single rectangle.
+            Then, click "Guess" button to see whether it's the largest overall.
+        </p>
+    </div>
+</div>
+
+<form method="POST" action="/" id="submitForm">
+    <input type="hidden" name="heights" value="{{ heights }}">
+    <input type="hidden" name="guessed" value="{{ data }}">
+    <button onclick="submit()"class="button">Guess</button>
+</form>
+
+<form method="POST" action="/guess" id="guessForm">
+    <input type="hidden" name="heights" value="{{ heights }}">
+    <input type="hidden" name="rowIndex" value="">
+    <input type="hidden" name="columnIndex" value="">
+</form>
+
+</body>
+
+<script>
+    function submit() {
+        $("#submitForm").submit();
+    };
+    
+    $("#howto-symbol").on("mouseenter", function() {
+        $(".howto-board").removeClass("hidden");
+    })
+    $("#howto-symbol").on("mouseleave", function() {
+        $(".howto-board").addClass("hidden");
+    })
+    
+    $(".single-rectangle").on("click", function() {
+        let rowIndex = 0;
+        let columnIndex = 0;
+        let values = $("input")[0].getAttribute("value");
+        $(this).addClass("columnIndex");
+        $(this).parent().addClass("rowIndex");
+        let rows = $(this).parent().parent().children();
+        for (let i=0;i<rows.length;i++) {
+            if (rows[i].classList.contains("rowIndex")) {
+                rowIndex = i;
+                break;
+            }
+        }
+        let columns = $(this).parent().find("div");
+        for (let j=0;j<columns.length - 1;j++) {
+            if (columns[j].classList.contains("columnIndex")) {
+                columnIndex = j;
+                break;
+            }
+        }
+        $(this).removeClass("columnIndex");
+        $(this).parent().removeClass("rowIndex");
+        $("#guessForm").children()[1].setAttribute('value', rowIndex);
+        $("#guessForm").children()[2].setAttribute('value', columnIndex);
+        $("#guessForm").submit();
+    })
+</script>
+
+</html>
