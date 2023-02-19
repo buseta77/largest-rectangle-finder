@@ -11,3 +11,5 @@ You can either click "Find" and it will display the largest area visually, or yo
 Then you can click "Guess" to see whether your guess is correct.
 
 ![answer](https://user-images.githubusercontent.com/86730766/219956629-0ccfb1e8-7eb8-4bac-b052-023c9d78eaa0.png)
+
+TECHS USED: Flask, JQuery, PostgreSQL
