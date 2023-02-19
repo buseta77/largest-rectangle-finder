@@ -25,7 +25,8 @@ def homepage():
             database = os.environ.get("DB_NAME"),
             user = os.environ.get("DB_USER"),
             password = os.environ.get("DB_PASSWORD"),
-            host = os.environ.get("DB_HOST")
+            host = os.environ.get("DB_HOST"),
+            port= "5432"
         ) 
         cur = con.cursor()
         cur.execute(f"INSERT into LargestRectangle (area) values ({rectangle_data[0]})")  
@@ -58,4 +59,4 @@ def guess():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
