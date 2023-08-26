@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
+from dotenv import load_dotenv
 import json
 import os
 import psycopg2
 from calculations import get_largest_chosen, get_largest_rectangle, get_random_array
 
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -22,11 +24,7 @@ def homepage():
         rectangle_data = get_largest_rectangle(heights)
         
         con = psycopg2.connect(
-            database = os.environ.get("DB_NAME"),
-            user = os.environ.get("DB_USER"),
-            password = os.environ.get("DB_PASSWORD"),
-            host = os.environ.get("DB_HOST"),
-            port= "5432"
+            dsn = os.environ.get("DB_URL")
         ) 
         cur = con.cursor()
         cur.execute(f"INSERT into LargestRectangle (area) values ({rectangle_data[0]})")  
